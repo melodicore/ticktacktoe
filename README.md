@@ -8,10 +8,10 @@ This project was made for the [Twoday code challenge](https://twoday.fi/koodihaa
 
 ## Overview
 
-[The backend](backend) is built with [Spring Boot](https://spring.io), with [MongoDB](https://www.mongodb.com/) as the
-database solution, and [the frontend](frontend) is using the [libGDX](https://libgdx.com/) game library, as well as the
+The [backend](backend) is built with [Spring Boot](https://spring.io), with [MongoDB](https://www.mongodb.com/) as the
+database solution, and the [frontend](frontend) is using the [libGDX](https://libgdx.com/) game library, as well as the
 [Apache HttpClient](https://hc.apache.org/httpcomponents-client-5.2.x/) for REST calls and Spring's Websocket components
-for realtime communication. [The api module](api) contains the Dto objects that are shared between the backend and the
+for realtime communication. The [api](api) module contains the dto objects that are shared between the backend and the
 frontend, as well as some shared constants.
 
 More information about the parts of the project can be found in their respective module readme files.
