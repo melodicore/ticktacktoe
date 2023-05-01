@@ -120,8 +120,8 @@ public class PlayerService {
                 .build();
     }
 
-    public TreeMap<String,PlayerDto> mapToPlayerDto(TreeMap<String, Player> map) {
-        return new TreeMap<>(map.entrySet().stream()
+    public HashMap<String,PlayerDto> mapToPlayerDto(HashMap<String, Player> map) {
+        return new HashMap<>(map.entrySet().stream()
                 .map(entry -> Map.entry(entry.getKey(), mapToPlayerDto(entry.getValue())))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
     }

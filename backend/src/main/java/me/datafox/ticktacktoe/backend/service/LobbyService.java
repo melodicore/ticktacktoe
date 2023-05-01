@@ -50,7 +50,7 @@ public class LobbyService {
                 .id(UUID.randomUUID().toString())
                 .name(host.getNickname() + "'s game")
                 .host(host)
-                .players(new TreeMap<>(Map.of(Symbols.X, host)))
+                .players(new HashMap<>(Map.of(Symbols.X, host)))
                 .build();
         lobbyRepository.save(lobby);
         return mapToLobbyDto(lobby);

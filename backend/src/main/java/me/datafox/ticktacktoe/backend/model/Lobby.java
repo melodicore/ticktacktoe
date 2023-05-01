@@ -4,7 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
-import java.util.TreeMap;
+import java.util.HashMap;
 
 /**
  * @author datafox
@@ -41,7 +41,7 @@ public class Lobby {
 
     @DBRef
     @Builder.Default
-    private TreeMap<String, Player> players = new TreeMap<>();
+    private HashMap<String, Player> players = new HashMap<>();
 
     @Builder.Default
     private boolean started = false;

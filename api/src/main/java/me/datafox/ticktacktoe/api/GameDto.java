@@ -3,7 +3,7 @@ package me.datafox.ticktacktoe.api;
 import lombok.*;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 /**
  * @author datafox
@@ -35,5 +35,5 @@ public class GameDto {
 
     private PlayerDto currentPlayer;
 
-    private TreeMap<String, PlayerDto> players;
+    private HashMap<String, PlayerDto> players;
 }
