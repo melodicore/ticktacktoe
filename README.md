@@ -20,7 +20,8 @@ More information about the parts of the project can be found in their respective
 
 Both the backend and the frontend require Java 17 or newer to run. Build the projects using [Gradle](https://gradle.org/)
 or download prebuilt runnable jar files from [Releases](https://github.com/melodicore/ticktacktoe/releases). The backend
-also needs MongoDB running with the default settings (localhost:27017, no login credentials)
+also needs MongoDB running with the default settings (localhost:27017, no login credentials). The default port for the
+game is 7770. Developed on Linux but should also work on Windows and Mac OS X.
 
 ## Rambling
 
