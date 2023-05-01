@@ -1,6 +1,7 @@
 package me.datafox.ticktacktoe.frontend.connection;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.datafox.ticktacktoe.api.Constants;
 
 /**
@@ -9,7 +10,7 @@ import me.datafox.ticktacktoe.api.Constants;
 public class ConnectionManager {
     private final RestHandler rest;
     private final SocketHandler socket;
-    @Getter private String address;
+    @Getter @Setter private String address;
     @Getter private String sessionId;
 
     public ConnectionManager() {
@@ -19,7 +20,6 @@ public class ConnectionManager {
 
     public void connect(String address, ConnectionCallback<String> callback) {
         if(address.replaceAll(":[0-9]+", "").equals(address)) address += ":" + Constants.PORT;
-        this.address = address;
         rest.connect(address, callback);
     }
 

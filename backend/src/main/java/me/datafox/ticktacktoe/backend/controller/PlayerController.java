@@ -25,12 +25,12 @@ public class PlayerController {
         return ResponseEntity.ok("The server is online");
     }
 
-    @RequestMapping("/version")
+    @GetMapping("/version")
     public ResponseEntity<String> version() {
         return ResponseEntity.ok(Constants.API_VERSION);
     }
 
-    @RequestMapping("/who")
+    @GetMapping("/who")
     public ResponseEntity<PlayerDto> who(Principal principal) {
         return ResponseEntity.ok(playerService.getPlayer(principal.getName()));
     }

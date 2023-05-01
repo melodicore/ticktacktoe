@@ -1,6 +1,7 @@
 package me.datafox.ticktacktoe.frontend.connection;
 
 import lombok.Getter;
+import me.datafox.ticktacktoe.api.Constants;
 import me.datafox.ticktacktoe.frontend.Game;
 import org.apache.hc.client5.http.HttpHostConnectException;
 import org.apache.hc.client5.http.HttpResponseException;
@@ -38,10 +39,25 @@ public class RestHandler {
 
     public void connect(String address, ConnectionCallback<String> callback) {
         this.address = address;
-        get("/version", callback);
+        get("/version", ConnectionCallback
+                .builder(String.class)
+                .completed(s -> connected(address, s, callback))
+                .failed(s -> {
+                    this.address = null;
+                    callback.failed(s);
+                })
+                .build());
+    }
+
+    private void connected(String address, String version, ConnectionCallback<String> callback) {
+        if(!Constants.API_VERSION.equals(version))
+            callback.failed("Version mismatch (Server: " + version + ", Client: " + Constants.API_VERSION + ")");
+        Game.con().setAddress(address);
+        callback.completed(version);
     }
 
     public void login(String username, String password, LoginCallback callback) {
+        System.out.println(username + ", " + address);
         request(ClassicRequestBuilder.post("http://" + address + "/login")
                 .setEntity(new UrlEncodedFormEntity(List.of(
                         new BasicNameValuePair("username", username),
