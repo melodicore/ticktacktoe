@@ -130,6 +130,8 @@ public class LobbyView extends View {
             width.setDisabled(!host);
             height.setDisabled(!host);
             condition.setDisabled(!host);
+            fallMode.setDisabled(!host);
+            start.setDisabled(!host);
             lobby.getPlayers().forEach(this::createPlayer);
         });
     }
