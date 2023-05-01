@@ -1,7 +1,5 @@
 rootProject.name = 'ticktacktoe'
+include 'api'
 include 'backend'
 include 'frontend'
-include 'frontend'
-include 'frontend'
-include 'api'
 
