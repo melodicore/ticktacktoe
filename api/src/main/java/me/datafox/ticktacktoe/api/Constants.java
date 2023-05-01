@@ -8,5 +8,5 @@ package me.datafox.ticktacktoe.api;
  */
 public class Constants {
     public static final int PORT = 7770;
-    public static final String API_VERSION = "1.0.1";
+    public static final String API_VERSION = "1.0.2";
 }

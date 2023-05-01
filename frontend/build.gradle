@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'me.datafox.ticktacktoe'
-version '1.0.1a'
+version '1.0.2'
 
 def appName = "Tick Tack Toe"
 mainClassName = 'me.datafox.ticktacktoe.frontend.TickTackToe'
