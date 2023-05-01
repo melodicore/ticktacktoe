@@ -1,0 +1,1 @@
+Dto objects and shared constants

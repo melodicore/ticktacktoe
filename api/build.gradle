@@ -1,0 +1,11 @@
+plugins {
+    id("java")
+    id("io.freefair.lombok") version "$lombokVersion"
+}
+
+group = 'me.datafox.ticktacktoe'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
