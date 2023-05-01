@@ -53,6 +53,7 @@ public class SettingsView extends View {
         quality.addListener(this::setQuality);
         color.addListener(UiUtils.simpleChangeListener(this::selectColor));
         save.addListener(UiUtils.simpleChangeListener(this::save));
+        ignore.addListener(UiUtils.simpleChangeListener(this::ignore));
 
         add(qualityLabel).align(Align.right);
         add(quality);
