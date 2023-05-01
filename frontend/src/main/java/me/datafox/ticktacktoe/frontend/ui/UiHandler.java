@@ -108,6 +108,7 @@ public class UiHandler {
 
     public void setColor(Color color) {
         if(color == null) return;
+        actions.clear();
         actions.add(new LerpColorAction(actualColor.cpy(), color, 2));
     }
 

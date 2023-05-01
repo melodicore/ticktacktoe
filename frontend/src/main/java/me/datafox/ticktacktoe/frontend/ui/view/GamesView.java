@@ -7,10 +7,8 @@ import me.datafox.ticktacktoe.api.GameDto;
 import me.datafox.ticktacktoe.api.PlayerDto;
 import me.datafox.ticktacktoe.api.Symbols;
 import me.datafox.ticktacktoe.frontend.Game;
-import me.datafox.ticktacktoe.frontend.ui.element.BaseTable;
-import me.datafox.ticktacktoe.frontend.ui.element.GameLabel;
-import me.datafox.ticktacktoe.frontend.ui.element.GameTextButton;
-import me.datafox.ticktacktoe.frontend.ui.element.SymbolToggleButton;
+import me.datafox.ticktacktoe.frontend.connection.EmptyCallback;
+import me.datafox.ticktacktoe.frontend.ui.element.*;
 import me.datafox.ticktacktoe.frontend.ui.screen.Screens;
 import me.datafox.ticktacktoe.frontend.ui.screen.TitleScreen;
 import me.datafox.ticktacktoe.frontend.utils.Defaults;
@@ -158,11 +156,25 @@ public class GamesView extends View {
             }
         }));
 
-        table.add(name).colspan(2).align(Align.center).row();
+        if(Game.player().isAdmin() && game.isFinished()) {
+            SymbolButton remove = new SymbolButton(Symbols.X);
+            remove.addListener(UiUtils.simpleChangeListener(() -> removeGame(game)));
+            table.add(name).align(Align.center);
+            table.add(remove).fill(false, true).expand(false, false).align(Align.right).row();
+        }
+        else table.add(name).colspan(2).align(Align.center).row();
         table.add(players);
         table.add(view);
 
         if(games.hasChildren() && games.getChildren().size % 2 == 0) games.row();
         games.add(table);
+    }
+
+    private void removeGame(GameDto game) {
+        Game.game().remove(game, EmptyCallback
+                .builder()
+                .completed(this::refresh)
+                .failed(parent::setMessage)
+                .build());
     }
 }

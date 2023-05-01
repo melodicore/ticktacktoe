@@ -27,6 +27,7 @@ public class GameSecurity {
         http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/version", "/error", "/register").permitAll()
+                .requestMatchers("/game/remove").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

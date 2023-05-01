@@ -18,4 +18,6 @@ public class PlayerDto {
     private String password;
 
     private ColorDto color;
+
+    private boolean admin;
 }

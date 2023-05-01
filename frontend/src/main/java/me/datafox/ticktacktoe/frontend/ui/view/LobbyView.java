@@ -104,6 +104,7 @@ public class LobbyView extends View {
     }
 
     private void back() {
+        Game.con().disconnect();
         parent.setView(Views.MainMenu);
     }
 

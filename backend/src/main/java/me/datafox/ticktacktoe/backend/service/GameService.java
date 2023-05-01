@@ -62,6 +62,10 @@ public class GameService {
         return mapToGameDto(gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new));
     }
 
+    public void removeGame(GameDto game) {
+        gameRepository.delete(gameRepository.findById(game.getId()).orElseThrow(GameNotFoundException::new));
+    }
+
     public GameDto addMove(String gameId, String username, MoveDto move) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
         Player player = playerRepository.findByUsername(username).orElseThrow(PlayerNotFoundException::new);

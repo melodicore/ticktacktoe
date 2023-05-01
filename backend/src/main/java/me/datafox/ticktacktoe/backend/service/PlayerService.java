@@ -50,8 +50,27 @@ public class PlayerService {
         Role role = createRoleIfNotFound("ROLE_USER");
         player.getRoles().add(role);
         role.getPlayers().add(player);
+        if(playerRepository.findAll().size() == 0) {
+            Role admin = createRoleIfNotFound("ROLE_ADMIN");
+            player.getRoles().add(admin);
+            admin.getPlayers().add(player);
+            roleRepository.save(admin);
+        }
         roleRepository.save(role);
         playerRepository.save(player);
+    }
+
+    public PlayerDto getPlayer(String username) {
+        return mapToPlayerDto(playerRepository.findByUsername(username).orElseThrow(PlayerNotFoundException::new));
+    }
+
+    public PlayerDto modifyPlayer(String username, PlayerDto playerDto) {
+        Player player = playerRepository.findByUsername(username).orElseThrow(PlayerNotFoundException::new);
+        player.setNickname(playerDto.getNickname());
+        if(playerDto.getPassword() != null) player.setPassword(passwordEncoder.encode(playerDto.getPassword()));
+        player.setColor(playerDto.getColor());
+        playerRepository.save(player);
+        return mapToPlayerDto(player);
     }
 
     public PlayerRankDto getPlayerRank(String username) {
@@ -97,6 +116,7 @@ public class PlayerService {
                 .username(player.getUsername())
                 .nickname(player.getNickname())
                 .color(player.getColor())
+                .admin(player.getRoles().stream().anyMatch(r -> r.getId().equals("ROLE_ADMIN")))
                 .build();
     }
 
@@ -114,18 +134,5 @@ public class PlayerService {
         Role role = Role.builder().id(id).build();
         roleRepository.save(role);
         return role;
-    }
-
-    public PlayerDto getPlayer(String username) {
-        return mapToPlayerDto(playerRepository.findByUsername(username).orElseThrow(PlayerNotFoundException::new));
-    }
-
-    public PlayerDto modifyPlayer(String username, PlayerDto playerDto) {
-        Player player = playerRepository.findByUsername(username).orElseThrow(PlayerNotFoundException::new);
-        player.setNickname(playerDto.getNickname());
-        if(playerDto.getPassword() != null) player.setPassword(passwordEncoder.encode(playerDto.getPassword()));
-        player.setColor(playerDto.getColor());
-        playerRepository.save(player);
-        return mapToPlayerDto(player);
     }
 }

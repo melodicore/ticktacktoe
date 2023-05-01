@@ -43,6 +43,10 @@ public class GameHandler implements ConnectionCallback<GameDto> {
         Game.con().disconnect();
     }
 
+    public void remove(GameDto game, EmptyCallback callback) {
+        Game.con().post("/game/remove", game, callback);
+    }
+
     public void setCallback(ConnectionCallback<GameDto> callback) {
         this.callback = callback;
     }

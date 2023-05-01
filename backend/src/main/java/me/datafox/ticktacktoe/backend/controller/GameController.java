@@ -9,10 +9,7 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -39,6 +36,12 @@ public class GameController {
             default -> list = gameService.getGames(page);
         }
         return ResponseEntity.ok(list);
+    }
+
+    @PostMapping("/game/remove")
+    public ResponseEntity<String> removeGame(@RequestBody GameDto game) {
+        gameService.removeGame(game);
+        return ResponseEntity.ok("success");
     }
 
     @MessageMapping("/game/{gameId}/move")
