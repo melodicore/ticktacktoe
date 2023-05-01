@@ -84,7 +84,7 @@ public class LobbyView extends View {
         right.add(conditionLabel).align(Align.right);
         right.add(condition).row();
         right.add(fallModeLabel).align(Align.right);
-        right.add(fallMode);
+        right.add(fallMode).fill(false, true).expand(false, false);
 
         add(name).colspan(2).row();
         add(left);
