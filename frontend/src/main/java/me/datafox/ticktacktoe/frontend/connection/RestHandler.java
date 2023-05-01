@@ -50,8 +50,10 @@ public class RestHandler {
     }
 
     private void connected(String address, String version, ConnectionCallback<String> callback) {
-        if(!Constants.API_VERSION.equals(version))
+        if(!Constants.API_VERSION.equals(version)) {
             callback.failed("Version mismatch (Server: " + version + ", Client: " + Constants.API_VERSION + ")");
+            return;
+        }
         Game.con().setAddress(address);
         callback.completed(version);
     }
