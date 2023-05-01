@@ -63,7 +63,6 @@ public class TitleScreen extends Screen {
     public void setMessage(String text) {
         message.setColor(1,1,1,1);
         message.setText(text);
-        System.out.println(text);
         Game.scheduler().schedule(() -> message.addAction(new FadeOutAction(2)), 2, TimeUnit.SECONDS);
     }
 }

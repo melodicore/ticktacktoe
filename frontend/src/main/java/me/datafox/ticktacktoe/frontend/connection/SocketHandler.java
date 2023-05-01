@@ -108,7 +108,6 @@ public class SocketHandler {
         @Override
         public void handleFrame(StompHeaders headers, Object payload) {
             try {
-                System.out.println(payload);
                 callback.completed(Game.json().fromJson(callback.getType(), (String) payload));
             } catch(Exception e) {
                 callback.failed(e.getMessage());

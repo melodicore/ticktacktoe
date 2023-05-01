@@ -59,7 +59,6 @@ public class RestHandler {
     }
 
     public void login(String username, String password, LoginCallback callback) {
-        System.out.println(username + ", " + address);
         request(ClassicRequestBuilder.post("http://" + address + "/login")
                 .setEntity(new UrlEncodedFormEntity(List.of(
                         new BasicNameValuePair("username", username),
@@ -79,7 +78,6 @@ public class RestHandler {
         Game.scheduler().execute(() -> {
             try(CloseableHttpClient client = HttpClientBuilder.create().setDefaultCookieStore(cookies).build()) {
                 String result = client.execute(builder.build(), new BasicHttpClientResponseHandler());
-                System.out.println(result);
                 if(callback instanceof EmptyCallback empty) empty.completed("");
                 else if(callback instanceof LoginCallback login) {
                     String token = cookies.getCookies().stream()
