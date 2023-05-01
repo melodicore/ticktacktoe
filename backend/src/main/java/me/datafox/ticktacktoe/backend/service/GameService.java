@@ -55,11 +55,6 @@ public class GameService {
                 .players(lobby.getPlayers())
                 .currentPlayer(lobby.getPlayers().get(Symbols.X))
                 .build();
-        //Add game to players
-        lobby.getPlayers().values().forEach(player -> {
-            player.getGames().add(game);
-            playerRepository.save(player);
-        });
         gameRepository.save(game);
     }
 
@@ -83,11 +78,12 @@ public class GameService {
         //Register the move
         game.getMoves().add(move);
         game.getBoard()[index] = move.getSymbol();
-        //Check if the game is finished
-        if(checkIfGameIsFinished(game)) {
+        //Check if the game is finished with a win
+        if(checkIfGameIsFinished(game)) game.setFinished(true);
+        //Check if the game is finished with a draw
+        else if(checkDraw(game.getBoard())) {
+            game.setCurrentPlayer(null);
             game.setFinished(true);
-            //Mark current player as null if the game is a draw
-            if(checkDraw(game.getBoard())) game.setCurrentPlayer(null);
         }
         //Change the current player if the game was not finished
         else setNextPlayer(game);
@@ -177,8 +173,7 @@ public class GameService {
     private boolean checkIfGameIsFinished(Game game) {
         return checkRows(game.getBoard(), game.getWidth(), game.getHeight(), game.getWinCondition()) ||
                 checkColumns(game.getBoard(), game.getWidth(), game.getHeight(), game.getWinCondition()) ||
-                checkDiagonals(game.getBoard(), game.getWidth(), game.getHeight(), game.getWinCondition()) ||
-                checkDraw(game.getBoard());
+                checkDiagonals(game.getBoard(), game.getWidth(), game.getHeight(), game.getWinCondition());
     }
 
     private boolean checkRows(String[] array, int width, int height, int condition) {

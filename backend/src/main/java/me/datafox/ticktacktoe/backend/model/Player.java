@@ -33,9 +33,5 @@ public class Player {
 
     @DBRef
     @Builder.Default
-    private List<Game> games = new ArrayList<>();
-
-    @DBRef
-    @Builder.Default
     private List<Role> roles = new ArrayList<>();
 }

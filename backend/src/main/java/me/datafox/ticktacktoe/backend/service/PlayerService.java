@@ -59,7 +59,7 @@ public class PlayerService {
     }
 
     public PlayerRankDto getPlayerRank(Player player) {
-        List<Game> games = player.getGames();
+        List<Game> games = gameRepository.findByFinished(true).filter(g -> g.getPlayers().containsValue(player)).toList();
         long wins = games.stream().filter(g -> g.getCurrentPlayer() != null && g.getCurrentPlayer().equals(player)).count();
         long losses = games.stream().filter(g -> g.getCurrentPlayer() != null && !g.getCurrentPlayer().equals(player)).count();
         long draws = games.stream().filter(g -> g.getCurrentPlayer() == null).count();

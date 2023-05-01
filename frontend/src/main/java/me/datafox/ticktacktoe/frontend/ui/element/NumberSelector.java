@@ -1,5 +1,6 @@
 package me.datafox.ticktacktoe.frontend.ui.element;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import lombok.Getter;
@@ -83,12 +84,14 @@ public class NumberSelector extends Table implements Disableable {
     }
 
     private void refresh() {
-        value = Math.max(Math.min(value, max), min);
-        decrease.setDisabled(value == min || disabled);
-        increase.setDisabled(value == max || disabled);
-        indicator.setText(Integer.toString(value));
-        if(value != oldValue) listeners.forEach(l -> l.accept(value));
-        oldValue = value;
+        Gdx.app.postRunnable(() -> {
+            value = Math.max(Math.min(value, max), min);
+            decrease.setDisabled(value == min || disabled);
+            increase.setDisabled(value == max || disabled);
+            indicator.setText(Integer.toString(value));
+            if(value != oldValue) listeners.forEach(l -> l.accept(value));
+            oldValue = value;
+        });
     }
 
     @Override

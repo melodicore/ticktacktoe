@@ -42,7 +42,7 @@ public class Board extends BaseTable {
 
     private BoardButton createButton(String symbol, String checkedSymbol, GameDto game, boolean turn, int x, int y) {
         if(symbol == null) {
-            BoardButton button = new BoardButton(checkedSymbol, false, false);
+            BoardButton button = new BoardButton(checkedSymbol, false, turn);
             if(checkedSymbol != null) button.addListener(UiUtils.simpleChangeListener(new Runnable() {
                 @Override
                 public void run() {
