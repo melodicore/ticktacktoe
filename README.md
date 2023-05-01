@@ -23,6 +23,9 @@ or download prebuilt runnable jar files from [Releases](https://github.com/melod
 also needs MongoDB running with the default settings (localhost:27017, no login credentials). The default port for the
 game is 7770. Developed on Linux but should also work on Windows and Mac OS X.
 
+When running the server, **the first person to create an account gets admin privileges**. The admin privileges allows
+the player to remove any finished game from the database, changing leaderboard statistics in the process.
+
 ## Rambling
 
 This is my first time ever using Spring Boot. Before starting this project, I had heard of it but hadn't even seen any
